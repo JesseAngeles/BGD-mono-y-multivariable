@@ -5,13 +5,13 @@ from sklearn.model_selection import train_test_split
 from BGD import multivariable
 
 #Leer archivo CSV
-option = input("1) monovariable\n2) multivariable\n") or 1
+option = input("1) monovariable\n2) multivariable\n") or 2
 if int(option) == 1:
     df = pd.read_csv('resources/casas.csv')
-    const_alpha = float(0.00000025)
+    const_alpha = float(0.00000007)
 else:
     df = pd.read_csv('resources/Dataset_multivariable.csv')
-    const_alpha = 0.00006
+    const_alpha = 0.000006
     
 
 #Dividir dataset
@@ -70,7 +70,7 @@ if len(weight) == 1:
     plt.subplot(1, 2, 1)
     for i, prediction in enumerate(prediction_history):
         plt.plot(x_train, prediction, label=f'Iteración {i}')
-    plt.scatter(x_train, y_train, color='black', label='Datos reales')
+    plt.scatter(x_test, y_test, color='black', label='Datos reales')
     plt.xlabel("Características")
     plt.ylabel("Precio (MDP)")
     plt.title("Predicciones en cada iteración")
@@ -79,10 +79,10 @@ if len(weight) == 1:
     plt.subplot(1, 2, 2)
 
 # Error de estimación por iteración (Gráfica 2)
-plt.plot(range(len(iteration_errors)), iteration_errors, label="Error absoluto por iteración")
+plt.plot(range(len(iteration_errors)), iteration_errors, marker='o', label="Error")
 plt.xlabel("Iteraciones")
 plt.ylabel("Error de estimación")
-plt.title("Error de estimación durante las iteraciones")
+plt.title("Error de estimación")
 plt.legend()
 
 plt.tight_layout()
